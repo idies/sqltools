@@ -10,6 +10,11 @@ GO
 
 */
 
+--this script assumes a db (in this case ts0to4)
+--created in simple recovery mode.
+
+
+
 --set FG's to readonly
 alter database ts0to4 modify filegroup FG01 readonly
 alter database ts0to4 modify filegroup FG02 readonly
@@ -40,14 +45,18 @@ backup database ts0to4
 backup log ts0to4 to disk = 'c:\data\data1\ts0to4Full_sw5_log.trn'
 	with checksum
 go
+-- BACKUP IS NOW COMPLETE!
+-------------------------------------------------------------------------------------------------------------------------------
 
-
+--------------------------------------------------------------------------------------------------------------------------------
+--BELOW IS HOW TO RESTORE A SINGLE FILE
+--------------------------------------------------------------------------------------------------------------------------------
 --set one file to offline
 alter database ts0to4 
 modify file (name=ts0to4_FG02, OFFLINE)
 
 
----restore FG02?
+---restore FG02 for example
 restore database ts0to4 file = 'ts0to4_FG02' 
 from disk = 'c:\data\data1\ts0to4Full_sw5.bak'
 with recovery
