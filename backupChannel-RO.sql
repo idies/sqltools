@@ -24,6 +24,7 @@ print @sql
 if (@doExecute = 1)
 	exec sp_executesql @sql
 
+set @sql = ''
 
 --3. set filegroups to readonly
 select @sql = coalesce(@sql, '')+'alter database ' + db_name() + ' modify filegroup ' + name + ' readonly ' + char(10) 
