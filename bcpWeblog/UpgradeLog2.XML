@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="bcpWeblog">
+</Property><Property Name="Solution File" Value="C:\Users\thakar\bcpWeblog\bcpWeblog.sln">
+</Property><Property Name="User Options File" Value="C:\Users\thakar\bcpWeblog\bcpWeblog.suo">
+</Property><Property Name="Date" Value="Saturday, January 16, 2016">
+</Property><Property Name="Time" Value="17:37 PM">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="bcpWeblog.sln" Description="File successfully backed up as C:\Users\thakar\bcpWeblog\Backup1\bcpWeblog.sln">
+</Event><Event ErrorLevel="0" Project="" Source="bcpWeblog.suo" Description="File successfully backed up as C:\Users\thakar\bcpWeblog\Backup1\bcpWeblog.suo">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Project file successfully backed up as C:\Users\thakar\bcpWeblog\Backup1\bcpWeblog.csproj">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.csproj.user" Description="Project user file successfully backed up as C:\Users\thakar\bcpWeblog\Backup1\bcpWeblog.csproj.user">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="AssemblyInfo.cs" Description="File successfully backed up as C:\Users\thakar\bcpWeblog\Backup1\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.cs" Description="File successfully backed up as C:\Users\thakar\bcpWeblog\Backup1\bcpWeblog.cs">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="App.ico" Description="File successfully backed up as C:\Users\thakar\bcpWeblog\Backup1\App.ico">
+</Event><Event ErrorLevel="1" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="bcpWeblog.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="bcpWeblog.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

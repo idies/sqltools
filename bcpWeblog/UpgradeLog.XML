@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="bcpWeblog">
+</Property><Property Name="Solution File" Value="H:\src\cs\bcpWeblog\bcpWeblog.sln">
+</Property><Property Name="User Options File" Value="H:\src\cs\bcpWeblog\bcpWeblog.suo">
+</Property><Property Name="Date" Value="Monday, May 04, 2009">
+</Property><Property Name="Time" Value="12:04 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="bcpWeblog.sln" Description="File successfully backed up as H:\src\cs\bcpWeblog\Backup\bcpWeblog.sln">
+</Event><Event ErrorLevel="0" Project="" Source="bcpWeblog.suo" Description="File successfully backed up as H:\src\cs\bcpWeblog\Backup\bcpWeblog.suo">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Project file successfully backed up as H:\src\cs\bcpWeblog\Backup\bcpWeblog.csproj">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.csproj.user" Description="Project user file successfully backed up as H:\src\cs\bcpWeblog\Backup\bcpWeblog.csproj.user">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="AssemblyInfo.cs" Description="File successfully backed up as H:\src\cs\bcpWeblog\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.cs" Description="File successfully backed up as H:\src\cs\bcpWeblog\Backup\bcpWeblog.cs">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="App.ico" Description="File successfully backed up as H:\src\cs\bcpWeblog\Backup\App.ico">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="bcpWeblog.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="bcpWeblog.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="bcpWeblog" Source="bcpWeblog.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

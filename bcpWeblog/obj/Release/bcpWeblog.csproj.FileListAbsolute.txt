@@ -1,0 +1,6 @@
+H:\src\cs\bcpWeblog\obj\Release\bcpWeblog.exe
+H:\src\cs\bcpWeblog\obj\Release\ResolveAssemblyReference.cache
+H:\src\cs\bcpWeblog\bin\Release\bcpWeblog.exe
+C:\Users\thakar\bcpWeblog\obj\Release\bcpWeblog.exe
+C:\Users\thakar\bcpWeblog\bin\Release\bcpWeblog.exe
+C:\Users\thakar\bcpWeblog\obj\Release\bcpWeblog.csprojResolveAssemblyReference.cache
