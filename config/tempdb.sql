@@ -39,6 +39,7 @@ ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev4', FILENAME = N'T:\sql_db\tem
 ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev5', FILENAME = N'T:\sql_db\tempdev5.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
 ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev6', FILENAME = N'T:\sql_db\tempdev6.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
 ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev7', FILENAME = N'T:\sql_db\tempdev7.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
+ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev8', FILENAME = N'T:\sql_db\tempdev8.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
 GO
 
 /* Restart SQL server to make the changes take effect 
