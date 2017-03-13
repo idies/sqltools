@@ -17,7 +17,7 @@ declare @srcFG sysname
 declare @destFG sysname
 
 set @srcFG =  'PRIMARY'
-set @destFG = 'DATA'
+set @destFG = 'PHOTO'
 
 declare CursorIndex cursor for
  select schema_name(t.schema_id) [schema_name], t.name, ix.name,
@@ -28,7 +28,7 @@ declare CursorIndex cursor for
  + case when ix.allow_row_locks=1 then  'ALLOW_ROW_LOCKS = ON, ' else 'ALLOW_ROW_LOCKS = OFF, ' end
  + case when INDEXPROPERTY(t.object_id, ix.name, 'IsStatistics') = 1 then 'STATISTICS_NORECOMPUTE = ON, ' else 'STATISTICS_NORECOMPUTE = OFF, ' end
  + case when ix.ignore_dup_key=1 then 'IGNORE_DUP_KEY = ON, ' else 'IGNORE_DUP_KEY = OFF, ' end
- + 'DROP_EXISTING = ON, SORT_IN_TEMPDB = OFF, FILLFACTOR =' + CAST(ix.fill_factor AS VARCHAR(3)) AS IndexOptions
+ + 'DROP_EXISTING = ON, SORT_IN_TEMPDB = ON, FILLFACTOR =100, DATA_COMPRESSION=PAGE'  AS IndexOptions
  , ix.is_disabled , FILEGROUP_NAME(ix.data_space_id) FileGroupName
  from sys.tables t 
  inner join sys.indexes ix on t.object_id=ix.object_id

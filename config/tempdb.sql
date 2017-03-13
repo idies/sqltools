@@ -11,12 +11,12 @@ use master
 go
 
 --change T: to wherever you actually want tempdb to be
-Alter database tempdb modify file (name = tempdev, filename = 'T:\sql_db\tempdb.mdf')
+Alter database tempdb modify file (name = tempdev, filename = 'E:\sql_db\tempdb.mdf')
 
 go
 
 --change T: to wherever you actually want tempdb to be
-Alter database tempdb modify file (name = templog, filename = 'T:\sql_db\templog.ldf')
+Alter database tempdb modify file (name = templog, filename = 'E:\sql_db\templog.ldf')
 
 go
 
@@ -28,18 +28,18 @@ go
 
 USE [master]; 
 GO 
-alter database tempdb modify file (name='tempdev', size = 25GB, FILEGROWTH = 10%);   --change 25GB to whatever the size of your drive is divided by 8
+alter database tempdb modify file (name='tempdev', size = 25GB, FILEGROWTH = 500MB);   --change 25GB to whatever the size of your drive is divided by 8
 GO
 /* Adding seven additional files */
 USE [master];
 GO
-ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev2', FILENAME = N'T:\sql_db\tempdev2.ndf' , SIZE = 25GB , FILEGROWTH = 10%); -- --change 25GB to whatever the size of your drive is divided by 8, do this for all these files
-ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev3', FILENAME = N'T:\sql_db\tempdev3.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
-ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev4', FILENAME = N'T:\sql_db\tempdev4.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
-ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev5', FILENAME = N'T:\sql_db\tempdev5.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
-ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev6', FILENAME = N'T:\sql_db\tempdev6.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
-ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev7', FILENAME = N'T:\sql_db\tempdev7.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
-ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev8', FILENAME = N'T:\sql_db\tempdev8.ndf' , SIZE = 25GB , FILEGROWTH = 10%);
+ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev2', FILENAME = N'E:\sql_db\tempdev2.ndf' , SIZE = 25GB , FILEGROWTH = 500MB); -- --change 25GB to whatever the size of your drive is divided by 8, do this for all these files
+ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev3', FILENAME = N'E:\sql_db\tempdev3.ndf' , SIZE = 25GB , FILEGROWTH = 500MB);
+ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev4', FILENAME = N'E:\sql_db\tempdev4.ndf' , SIZE = 25GB , FILEGROWTH = 500MB);
+ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev5', FILENAME = N'D:\sql_db\tempdev5.ndf' , SIZE = 25GB , FILEGROWTH = 500MB);
+ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev6', FILENAME = N'D:\sql_db\tempdev6.ndf' , SIZE = 25GB , FILEGROWTH = 500MB);
+ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev7', FILENAME = N'D:\sql_db\tempdev7.ndf' , SIZE = 25GB , FILEGROWTH = 500MB);
+ALTER DATABASE [tempdb] ADD FILE (NAME = N'tempdev8', FILENAME = N'D:\sql_db\tempdev8.ndf' , SIZE = 25GB , FILEGROWTH = 500MB);
 GO
 
 /* Restart SQL server to make the changes take effect 
