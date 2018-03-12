@@ -1,3 +1,8 @@
+drop procedure if exists spFileFGInfo
+go
+
+create procedure spFileFGInfo as
+
 set nocount on 
 create table #Data( 
       FileID int NOT NULL, 

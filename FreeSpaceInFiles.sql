@@ -3,7 +3,7 @@ DECLARE @DBName NVARCHAR(100) = NULL, --Provide DBName if looking for a specific
         @Drive NVARCHAR(2) = NULL --Mention drive letter if you are concerned of only a single drive where you are running out of space
  
 
- set @dbname = 'BestDR13_CCI'
+ set @dbname = db_name()
 
 DECLARE @cmd NVARCHAR(4000)
 IF (SELECT OBJECT_ID('tempdb.dbo.#DBName')) IS NOT NULL

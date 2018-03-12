@@ -19,7 +19,7 @@ INNER JOIN [sys].[data_spaces] s
 WHERE OBJECTPROPERTY(i.[object_id], 'IsUserTable') = 1
 --and i.type = 5
 --and i.index_id > 0
-and f.name = 'PRIMARY'
+--and f.name = 'PRIMARY'
 ORDER BY OBJECT_NAME(i.[object_id])
     ,f.[name]
  --   ,i.[data_space_id]
