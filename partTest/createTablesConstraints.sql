@@ -50,7 +50,7 @@ insert @schemes values (2, 'b', 'PartSchemeB')
 -- create partitioned table
 --======================
 
-set @createPartitionedTable = 'CREATE TABLE [dbo].[TestA](
+set @createPartitionedTable = 'DROP TABLE IF EXISTS [dbo].[TestA];CREATE TABLE [dbo].[TestA](
 	id int not null,
  CONSTRAINT [pk_a_id] PRIMARY KEY CLUSTERED 
 (
@@ -63,7 +63,7 @@ print @createPartitionedTable
 print @newline
 print @newline
 
-set @createPartitionedTable = 'CREATE TABLE [dbo].[TestB](
+set @createPartitionedTable = 'DROP TABLE IF EXISTS [dbo].[TestB];CREATE TABLE [dbo].[TestB](
 	id int not null,
  CONSTRAINT [pk_b_id] PRIMARY KEY CLUSTERED 
 (
@@ -150,10 +150,10 @@ begin
 		end
 		else if (@count = @npart)
 		begin
-			set @sql='ALTER TABLE [dbo].['+@tablename+'] ADD CONSTRAINT [ck_'+@tablename+'] CHECK (([id]>='+cast(@minLim as nvarchar)+' and [id] is not null))'
+			set @sql='ALTER TABLE [dbo].['+@tablename+'] ADD CONSTRAINT [ck_'+@tablename+'] CHECK (([id]>'+cast(@minLim - 1 as nvarchar)+' and [id] is not null))'
 		end
 		else
-			set @sql='ALTER TABLE [dbo].['+@tablename+'] ADD CONSTRAINT [ck_'+@tablename+'] CHECK (([id]>='+cast(@minLim as nvarchar) + ' AND [id]<='+cast(@maxLim as nvarchar)+' and [id] is not null))'
+			set @sql='ALTER TABLE [dbo].['+@tablename+'] ADD CONSTRAINT [ck_'+@tablename+'] CHECK (([id]>'+cast(@minLim - 1 as nvarchar) + ' AND [id]<='+cast(@maxLim as nvarchar)+' and [id] is not null))'
 
 
 		print @sql
