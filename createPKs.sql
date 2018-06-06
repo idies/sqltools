@@ -13,11 +13,16 @@ declare @TSQLScripCreationIndex varchar(max)
 declare @TSQLScripDisableIndex varchar(max)
 
 
+
+
+
 declare @srcFG sysname
 declare @destFG sysname
 
 set @srcFG =  'DATAFG'
-set @destFG = 'DATAFG'
+set @destFG = 'SPEC'
+
+
 
 declare CursorIndex cursor for
  select schema_name(t.schema_id) [schema_name], t.name, ix.name,
@@ -28,7 +33,8 @@ declare CursorIndex cursor for
  + case when ix.allow_row_locks=1 then  'ALLOW_ROW_LOCKS = ON, ' else 'ALLOW_ROW_LOCKS = OFF, ' end
  + case when INDEXPROPERTY(t.object_id, ix.name, 'IsStatistics') = 1 then 'STATISTICS_NORECOMPUTE = ON, ' else 'STATISTICS_NORECOMPUTE = OFF, ' end
  + case when ix.ignore_dup_key=1 then 'IGNORE_DUP_KEY = ON, ' else 'IGNORE_DUP_KEY = OFF, ' end
- + 'DROP_EXISTING = OFF, SORT_IN_TEMPDB = ON, FILLFACTOR =100, DATA_COMPRESSION=PAGE'  AS IndexOptions
+ --+ case when @dropExisting=1 then 'DROP_EXISTING=ON, ' else 'DROP_EXISTING = OFF, ' end
+ + 'SORT_IN_TEMPDB = ON, FILLFACTOR =100, DATA_COMPRESSION=PAGE'  AS IndexOptions
  , ix.is_disabled , FILEGROUP_NAME(ix.data_space_id) FileGroupName
  from sys.tables t 
  inner join sys.indexes ix on t.object_id=ix.object_id
@@ -38,9 +44,9 @@ declare CursorIndex cursor for
  ix.type = 1
  --and ix.is_primary_key=0 and ix.is_unique_constraint=0 
  --and schema_name(tb.schema_id)= @SchemaName and tb.name=@TableName
- and t.name in (select TableName from SueDB.dbo.IndexInfo where IndexID=1)
+ and t.name in (select TableName from SueDB.dbo.dr14xIndexInfo where IndexID=1)
  and t.is_ms_shipped=0 and t.name<>'sysdiagrams'
--- and FILEGROUP_NAME(ix.data_space_id) = @srcFG
+--and FILEGROUP_NAME(ix.data_space_id) = @srcFG
  order by schema_name(t.schema_id), t.name, ix.name
 
 open CursorIndex
@@ -70,7 +76,7 @@ begin
  while (@@fetch_status=0)
  begin
   if @IsIncludedColumn=0 
-   set @IndexColumns=@IndexColumns + @ColumnName  + case when @IsDescendingKey=1  then ' DESC, ' else  ' ASC, ' end
+   set @IndexColumns=@IndexColumns +quotename( @ColumnName)  + case when @IsDescendingKey=1  then ' DESC, ' else  ' ASC, ' end
   else 
    set @IncludedColumns=@IncludedColumns  + @ColumnName  +', ' 
 
@@ -90,13 +96,20 @@ begin
  set @TSQLScripCreationIndex='CREATE '+ @is_unique  +@IndexTypeDesc + ' INDEX ' +QUOTENAME(@IndexName)+' ON ' + QUOTENAME(@SchemaName) +'.'+ QUOTENAME(@TableName)+ '('+@IndexColumns+') '+ 
   case when len(@IncludedColumns)>0 then CHAR(13) +'INCLUDE (' + @IncludedColumns+ ')' else '' end + CHAR(13)+'WITH (' + @IndexOptions+ ') ON ' + QUOTENAME(@destFG) + ';'  
 
+
+  
+declare @sql nvarchar(max)
+set @sql = concat('ALTER TABLE ', quotename(@schemaname), '.', quotename(@tablename), ' ADD CONSTRAINT ', quotename(@indexname), 
+			' PRIMARY KEY CLUSTERED (', @IndexColumns, ')', ' WITH (' , @IndexOptions, ') ON ' , QUOTENAME(@destFG) , ';')
  if @is_disabled=1 
   set  @TSQLScripDisableIndex=  CHAR(13) +'ALTER INDEX ' +QUOTENAME(@IndexName) + ' ON ' + QUOTENAME(@SchemaName) +'.'+ QUOTENAME(@TableName) + ' DISABLE;' + CHAR(13) 
 
- print @TSQLScripCreationIndex
+ --print @TSQLScripCreationIndex
+ print @sql
+
 
  update SueDB.dbo.DR14xIndexInfo
- set indexSQL = @TSQLScripCreationIndex
+ set indexSQL = @sql
  --destFG = @destFG
  where IndexName = @indexName
  
@@ -112,6 +125,12 @@ deallocate CursorIndex
 
 /*
 -- create CIs on new FG
+
+select * from suedb.dbo.DR14xIndexInfo
+
+up
+
+
 
 
 CREATE UNIQUE CLUSTERED INDEX [pk_apogeePlate_plate_visit_id] ON [dbo].[apogeePlate](plate_visit_id ASC) 

@@ -16,8 +16,8 @@ declare @TSQLScripDisableIndex varchar(max)
 declare @srcFG sysname
 declare @destFG sysname
 
-set @srcFG =  'PRIMARY'
-set @destFG = 'DATAFG'
+set @srcFG =  'DATAFG'
+set @destFG = 'SPEC'
 
 declare CursorIndex cursor for
  select schema_name(t.schema_id) [schema_name], t.name, ix.name,
@@ -37,9 +37,9 @@ declare CursorIndex cursor for
  ix.type > 1
  --and ix.is_primary_key=0 and ix.is_unique_constraint=0 
  --and schema_name(tb.schema_id)= @SchemaName and tb.name=@TableName
- and t.name in (select TableName from SueDB.dbo.IndexInfo where IndexID>1)
+ and t.name in (select TableName from SueDB.dbo.Dr14xIndexInfo where IndexID>1)
  and t.is_ms_shipped=0 and t.name<>'sysdiagrams'
- and FILEGROUP_NAME(ix.data_space_id) = @srcFG
+ --and FILEGROUP_NAME(ix.data_space_id) = @srcFG
  order by schema_name(t.schema_id), t.name, ix.name
 
 open CursorIndex
@@ -84,6 +84,8 @@ begin
  --  print @IndexColumns
  --  print @IncludedColumns
 
+
+
  set @TSQLScripCreationIndex =''
  set @TSQLScripDisableIndex =''
  set @TSQLScripCreationIndex='CREATE '+ @is_unique  +@IndexTypeDesc + ' INDEX ' +QUOTENAME(@IndexName)+' ON ' + QUOTENAME(@SchemaName) +'.'+ QUOTENAME(@TableName)+ '('+@IndexColumns+') '+ 
@@ -94,10 +96,11 @@ begin
 
  print @TSQLScripCreationIndex
 
-  update SueDB.dbo.IndexInfo
- set indexSQL = @TSQLScripCreationIndex,
- destFG = @destFG
+  update SueDB.dbo.DR14xIndexInfo
+ set indexSQL = @TSQLScripCreationIndex
+ --destFG = @destFG
  where IndexName = @indexName
+ 
  --print @TSQLScripDisableIndex
 
  fetch next from CursorIndex into  @SchemaName, @TableName, @IndexName, @is_unique, @IndexTypeDesc, @IndexOptions,@is_disabled, @FileGroupName
@@ -111,6 +114,19 @@ deallocate CursorIndex
 CREATE NONCLUSTERED INDEX [i_DataConstants_value] ON [dbo].[DataConstants](value ASC) 
 WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, SORT_IN_TEMPDB = OFF, FILLFACTOR =0) ON [DATA];
  
+ select * from SueDB.dbo.DR14xIndexInfo
+ where indexID > 1
+
+  select * from SueDB.dbo.DR14xIndexInfo
+ where destFG is null
+
+ CREATE NONCLUSTERED INDEX [i_DataConstants_value] ON [dbo].[DataConstants](value ASC)  WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, SORT_IN_TEMPDB = ON, FILLFACTOR = 100, DATA_COMPRESSION=PAGE) ON [DATAFG];
+
+ update SueDB.dbo.DR14xIndexInfo
+ set sourceFG='SPEC', destFG='SPEC'
+ where tablename = 'SpecPhotoAll'
+
+
 CREATE NONCLUSTERED INDEX [i_PlateX_htmID_ra_dec_cx_cy_cz] ON [dbo].[PlateX](htmID ASC, ra ASC, dec ASC, cx ASC, cy ASC, cz ASC) 
 WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, SORT_IN_TEMPDB = OFF, FILLFACTOR =0) ON [DATA];
  
@@ -131,9 +147,11 @@ WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_N
  
 CREATE NONCLUSTERED INDEX [i_zooNoSpec_objID] ON [dbo].[zooNoSpec](objid ASC) 
 WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, SORT_IN_TEMPDB = OFF, FILLFACTOR =0) ON [DATA];
-*/
 
-CREATE NONCLUSTERED INDEX [i_zooSpec_objID] ON [dbo].[zooSpec](objid ASC) WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, DATA_COMPRESSION=PAGE, SORT_IN_TEMPDB = ON, FILLFACTOR = 100) ON [DATA];
+
+CREATE NONCLUSTERED INDEX [i_zooSpec_objID] ON [dbo].[zooSpec](objid ASC) 
+WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, DATA_COMPRESSION=PAGE, SORT_IN_TEMPDB = ON, FILLFACTOR = 100) ON [DATA];
  
-CREATE NONCLUSTERED INDEX [i_zooConfidence_objID] ON [dbo].[zooConfidence](objid ASC) WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, DATA_COMPRESSION=PAGE, SORT_IN_TEMPDB = ON, FILLFACTOR = 100) ON [DATA];
- 
+CREATE NONCLUSTERED INDEX [i_zooConfidence_objID] ON [dbo].[zooConfidence](objid ASC) 
+WITH (PAD_INDEX = OFF, ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, DATA_COMPRESSION=PAGE, SORT_IN_TEMPDB = ON, FILLFACTOR = 100) ON [DATA];
+ */

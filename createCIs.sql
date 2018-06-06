@@ -16,8 +16,8 @@ declare @TSQLScripDisableIndex varchar(max)
 declare @srcFG sysname
 declare @destFG sysname
 
-set @srcFG =  'PRIMARY'
-set @destFG = 'MATCH'
+set @srcFG =  'DATAFG'
+set @destFG = 'DATAFG'
 
 declare CursorIndex cursor for
  select schema_name(t.schema_id) [schema_name], t.name, ix.name,

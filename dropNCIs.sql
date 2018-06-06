@@ -8,8 +8,11 @@ DECLARE CursorIndexes CURSOR FOR
  INNER JOIN sys.tables t ON t.object_id= i.object_id
  WHERE i.type>0 and t.is_ms_shipped=0 and t.name<>'sysdiagrams'
  and (is_primary_key=0 )
-  and FILEGROUP_NAME(i.data_space_id) = 'PRIMARY'
+ and i.type = 2
+ 
+  --and FILEGROUP_NAME(i.data_space_id) = 'PRIMARY'
  --and is_unique_constraint=0)
+
 
 OPEN CursorIndexes
 FETCH NEXT FROM CursorIndexes INTO @SchemaName,@TableName,@IndexName
@@ -33,4 +36,17 @@ DROP INDEX [dbo].[PlateX].[i_PlateX_htmID_ra_dec_cx_cy_cz]
 DROP INDEX [dbo].[sdssTileAll].[i_sdssTileAll_tileRun_tile]
 DROP INDEX [dbo].[sdssTileAll].[i_sdssTileAll_htmID_racen_deccen]
 DROP INDEX [dbo].[zooNoSpec].[i_zooNoSpec_objID]
+*/
+
+
+/*
+DROP INDEX [dbo].[apogeeObject].[i_apogeeObject_apogee_id_j_h_k_j]
+DROP INDEX [dbo].[apogeeStar].[i_apogeeStar_apogee_id]
+DROP INDEX [dbo].[apogeeStar].[i_apogeeStar_htmID]
+DROP INDEX [dbo].[apogeeVisit].[i_apogeeVisit_apogee_id]
+DROP INDEX [dbo].[apogeeVisit].[i_apogeeVisit_plate_mjd_fiberid]
+DROP INDEX [dbo].[aspcapStar].[i_aspcapStar_apstar_id]
+DROP INDEX [dbo].[PlateX].[i_PlateX_htmID_ra_dec_cx_cy_cz]
+DROP INDEX [dbo].[zooConfidence].[i_zooConfidence_objID]
+DROP INDEX [dbo].[zooSpec].[i_zooSpec_objID]
 */

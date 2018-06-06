@@ -1,7 +1,15 @@
-drop procedure if exists spFileFGInfo
+
+exec sp_filefginfo
+
+
+use master
 go
 
-create procedure spFileFGInfo as
+
+drop procedure if exists sp_FileFGInfo
+go
+
+create procedure sp_FileFGInfo as
 
 set nocount on 
 create table #Data( 

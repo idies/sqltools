@@ -7,3 +7,5 @@ WHERE
 --TBL.name = @TableName AND 
 IDX.index_id < 2
 GROUP BY TBL.object_id, TBL.name;
+
+
