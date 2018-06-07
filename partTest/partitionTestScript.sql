@@ -1,6 +1,7 @@
-
-
-
+use suedb
+go
+ 
+ -- at the very end of this script there is a nice query that gives you all sorts of info about what's going on with your partitions
 
 
 --counts from test tables to see what is where
