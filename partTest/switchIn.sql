@@ -21,3 +21,15 @@ partition 4
 select count(*) from TestA
 where $partition.pfnAB(id) = 2
 
+alter table TestA
+switch partition 1 to test_a01
+
+alter table TestA
+switch partition 2 to test_a02
+
+alter table TestA
+switch partition 3 to test_a03
+
+alter table TestA
+switch partition 4 to test_a04
+
